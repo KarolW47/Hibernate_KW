@@ -26,7 +26,7 @@ public class Main {
         List<Book> books = session.createQuery("FROM " + Book.class.getName()).list();
 
         for (Book book1 : books) {
-            System.out.println("Book author: ]" + book1.getAuthor());
+            System.out.println("Book author: " + book1.getAuthor());
             System.out.println("Book name: " + book1.getName());
             System.out.println(" ");
         }

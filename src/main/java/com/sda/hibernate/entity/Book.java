@@ -9,9 +9,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name", nullable = false)
+//    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "author", nullable = false)
+//    @Column(name = "author", nullable = false)
     private String author;
 
     public int getId() {
