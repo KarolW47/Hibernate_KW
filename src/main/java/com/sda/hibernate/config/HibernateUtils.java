@@ -6,30 +6,22 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
 
-    private static final SessionFactory SESSION_FACTORY;
+    private final static SessionFactory sf =
+            new Configuration()
+                    .configure()
+                    .buildSessionFactory();
 
-    static {
+    private static Session session = sf.openSession();
 
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-            SESSION_FACTORY = configuration.buildSessionFactory();
-        } catch (Throwable e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
-
-    private static Session session = SESSION_FACTORY.openSession();
-
-    public static Session getConnection(){
+    public static Session getSession(){
         if(session == null){
             session = (Session) new HibernateUtils();
         }
         return session;
     }
 
-    public static void closeConnection() {
+    public static void closeConnection(){
         session.close();
-        SESSION_FACTORY.close();
+        sf.close();
     }
 }

@@ -1,38 +1,49 @@
 package com.sda.hibernate;
 
+
 import com.sda.hibernate.config.HibernateUtils;
+import com.sda.hibernate.entity.Author;
 import com.sda.hibernate.entity.Book;
+import com.sda.hibernate.entity.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
-
 public class Main {
+
 
     public static void main(String[] args) {
 
-        Session session = HibernateUtils.getConnection();
+        Session session = HibernateUtils.getSession();
         Transaction tx = null;
 
-        tx = session.beginTransaction();
-        Book book = new Book();
-        book.setAuthor("Maciek");
-        book.setName("leci w kosmos");
-        session.save(book);
+//        List<Book> books = session.createQuery(
+//                "FROM " + Book.class.getName()
+//        ).list();
+//
+//        for (Book book1: books){
+//            System.out.println(book1.getAuthors());
+//            System.out.println(book1.getName());
+//        }
 
+        tx = session.beginTransaction();
+
+        Category category = new Category();
+        category.setName("Fantastyka");
+
+        Author author = new Author();
+        author.setName("Jan");
+        author.setLastname("Kowalski");
+
+
+        Book book1 = new Book();
+        book1.setName("Wiedzmin");
+        book1.setCategory(category);
+        book1.getAuthors().add(author);
+
+        session.save(book1);
         tx.commit();
 
-        tx = session.beginTransaction();
-        List<Book> books = session.createQuery("FROM " + Book.class.getName()).list();
 
-        for (Book book1 : books) {
-            System.out.println("Book author: " + book1.getAuthor());
-            System.out.println("Book name: " + book1.getName());
-            System.out.println(" ");
-        }
-        tx.commit();
-
-        HibernateUtils.closeConnection();
-
+//        HibernateUtils.closeConnection();
     }
 }

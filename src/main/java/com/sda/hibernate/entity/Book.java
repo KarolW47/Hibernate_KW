@@ -1,18 +1,41 @@
 package com.sda.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-//@Table(name = "book")
 public class Book {
 
     @Id
+    @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @Column(name = "name", nullable = false)
+
+    @Column(name = "name", nullable = false)
     private String name;
-//    @Column(name = "author", nullable = false)
-    private String author;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Category category;
+
+    @ManyToMany(mappedBy = "books", cascade = {CascadeType.ALL})
+    private List<Author> authors = new ArrayList<>();
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getId() {
         return id;
@@ -28,13 +51,5 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 }
