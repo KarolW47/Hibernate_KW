@@ -33,7 +33,10 @@
         <mapping class="com.sda.hibernate.entity.Book"></mapping>
         <mapping class="com.sda.hibernate.entity.Author"></mapping>
         <mapping class="com.sda.hibernate.entity.Category"></mapping>
-
+        <mapping class="com.sda.hibernate.entity.Adress"></mapping>
+        <mapping class="com.sda.hibernate.entity.Employee"></mapping>
+        <mapping class="com.sda.hibernate.entity.Firm"></mapping>
+        <mapping class="com.sda.hibernate.entity.Job"></mapping>
 
     </session-factory>
 </hibernate-configuration>

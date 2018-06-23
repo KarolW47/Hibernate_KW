@@ -8,6 +8,9 @@ import com.sda.hibernate.entity.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
 
 
@@ -34,11 +37,20 @@ public class Main {
         author.setName("Jan");
         author.setLastname("Kowalski");
 
+        Author author1 = new Author();
+        author1.setName("Bogusław");
+        author1.setLastname("Nowak");
 
         Book book1 = new Book();
         book1.setName("Wiedzmin");
         book1.setCategory(category);
-        book1.getAuthors().add(author);
+
+        Set<Author> authors = new HashSet<>();
+        authors.add(author);
+        authors.add(author1);
+
+        book1.setAuthors(authors);
+
 
         session.save(book1);
         tx.commit();

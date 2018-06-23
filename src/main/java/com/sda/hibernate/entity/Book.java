@@ -1,8 +1,7 @@
 package com.sda.hibernate.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -18,18 +17,18 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 
-    @ManyToMany(mappedBy = "books", cascade = {CascadeType.ALL})
-    private List<Author> authors = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.ALL})
+    private Set<Author> authors;
 
     public Category getCategory() {
         return category;
     }
 
-    public List<Author> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 

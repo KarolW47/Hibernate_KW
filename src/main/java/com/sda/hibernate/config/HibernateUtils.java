@@ -6,21 +6,28 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
 
-    private final static SessionFactory sf =
+    private static SessionFactory sf =
             new Configuration()
                     .configure()
                     .buildSessionFactory();
 
     private static Session session = sf.openSession();
 
-    public static Session getSession(){
-        if(session == null){
+    public static Session getSession() {
+        if (session == null) {
             session = (Session) new HibernateUtils();
         }
         return session;
     }
 
-    public static void closeConnection(){
+    public static SessionFactory getSessionFactory() {
+        if (sf == null) {
+            sf = (SessionFactory) new HibernateUtils();
+        }
+        return sf;
+    }
+
+    public static void closeConnection() {
         session.close();
         sf.close();
     }
